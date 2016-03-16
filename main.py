@@ -1,5 +1,8 @@
 import praw
 import urllib
+import sys
+sys.stdout = open("log", "w")
+sys.stderr = open("logerr", "w")
 
 subreddits = []
 sub = []
