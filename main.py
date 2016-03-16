@@ -1,8 +1,8 @@
 import praw
 import urllib
 import sys
-sys.stdout = open("log", "w")
-sys.stderr = open("logerr", "w")
+sys.stdout = open("log.log", "w")
+sys.stderr = open("logerr.log", "w")
 
 subreddits = []
 sub = []
@@ -35,4 +35,7 @@ for sub in subreddits:
             print "Error retrieving " + link.title + " from " + sub[0] + " (Text post??)"
             continue
         download = urllib.urlretrieve(link.url, pictureLocation + "\\" + link.url.split("/")[-1])
-        print "Got " + link.url.split("/")[-1] + " (" + link.title + ")" + " from " + sub[0]
+        try:
+            print "Got " + link.url.split("/")[-1] + " (" + link.title + ")" + " from " + sub[0]
+        except:
+            print "Unicode Error or something"
