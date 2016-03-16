@@ -28,8 +28,8 @@ for sub in subreddits:
     elif (sub[2] == "all"):
         submissions = R.get_subreddit(sub[0]).get_top_from_all(limit = int(sub[1]))
     for link in submissions:
-        if (link.url.split("/")[-1] == ""):
-            print "Error retrieving " + link.title + " from " + sub[0]
+        if (link.url.split("/")[-1] == ""): # URL ends in a "/" so it is a text post
+            print "Error retrieving " + link.title + " from " + sub[0] + " (Text post??)"
             continue
         download = urllib.urlretrieve(link.url, pictureLocation + "\\" + link.url.split("/")[-1])
         print "Got " + link.url.split("/")[-1] + " (" + link.title + ")" + " from " + sub[0]
