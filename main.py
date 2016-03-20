@@ -34,6 +34,9 @@ for sub in subreddits:
         if (link.url.split("/")[-1] == ""): # URL ends in a "/" so it is a text post
             print "Error retrieving " + link.title + " from " + sub[0] + " (Text post??)"
             continue
+        if (link.url.split("/")[-1].find(".") == -1 or link.url.split("/")[-1].find("gifv") != -1):
+            print "Link is not to an image: " + link.url.split("/")[-1] + " -- " + link.title
+            continue
         download = urllib.urlretrieve(link.url, pictureLocation + "\\" + link.url.split("/")[-1])
         try:
             print "Got " + link.url.split("/")[-1] + " (" + link.title + ")" + " from " + sub[0]
