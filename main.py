@@ -1,6 +1,14 @@
 import praw
 import urllib
 import sys
+
+def stringContains(string, checks, breakChar):
+    checks = checks.split(breakChar)
+    for check in checks:
+        if (string.find(check) != -1):
+            return True
+    return False
+
 sys.stdout = open("log.log", "w")
 sys.stderr = open("logerr.log", "w")
 
@@ -34,7 +42,7 @@ for sub in subreddits:
         if (link.url.split("/")[-1] == ""): # URL ends in a "/" so it is a text post
             print "Error retrieving " + link.title + " from " + sub[0] + " (Text post??)"
             continue
-        if (link.url.split("/")[-1].find(".") == -1 or link.url.split("/")[-1].find("gifv") != -1):
+        if (link.url.split("/")[-1].find(".") == -1 or stringContains(link.url.split("/")[-1], "gifv/gif/html/htm", "/")):
             print "Link is not to an image: " + link.url.split("/")[-1] + " -- " + link.title
             continue
         download = urllib.urlretrieve(link.url, pictureLocation + "\\" + link.url.split("/")[-1])
